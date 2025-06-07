@@ -3,56 +3,95 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Fintech Dashboard Demo</title>
+  <title>Fintech Dashboard Pro</title>
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
   <!-- Google Fonts & Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet"/>
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    html.dark body {
-      background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    :root {
+      --dark-bg-1: #0d1520;
+      --dark-bg-2: #121c2d;
+      --light-bg-1: #f8fafc;
+      --light-bg-2: #eef2f7;
+      --primary: #3b82f6;
+      --primary-light: #60a5fa;
+      --primary-dark: #2563eb;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --info: #06b6d4;
     }
-    html.light body {
-      background: linear-gradient(135deg, #f1f5f9 0%, #e0e7ef 100%);
-    }
+    
     body {
       font-family: 'Inter', sans-serif;
       min-height: 100vh;
-      transition: background 0.4s;
+      transition: background 0.4s, color 0.4s;
     }
+    
+    html.dark body {
+      background: linear-gradient(135deg, var(--dark-bg-1) 0%, var(--dark-bg-2) 100%);
+      color: #e2e8f0;
+    }
+    
+    html.light body {
+      background: linear-gradient(135deg, var(--light-bg-1) 0%, var(--light-bg-2) 100%);
+      color: #334155;
+    }
+    
     .glass {
-      backdrop-filter: blur(8px) saturate(120%);
-      background: rgba(30, 41, 59, 0.65);
-      border-radius: 20px;
+      backdrop-filter: blur(12px) saturate(180%);
+      border-radius: 16px;
       border: 1px solid rgba(255,255,255,0.08);
       box-shadow: 0 8px 32px 0 rgba(0,0,0,0.18);
       transition: background 0.4s;
     }
-    html.light .glass {
-      background: rgba(255,255,255,0.72);
-      border: 1px solid rgba(30,41,59,0.08);
-      box-shadow: 0 8px 32px 0 rgba(30,41,59,0.10);
+    
+    html.dark .glass {
+      background: rgba(18, 28, 45, 0.85);
     }
+    
+    html.light .glass {
+      background: rgba(255,255,255,0.85);
+      border: 1px solid rgba(30,41,59,0.08);
+      box-shadow: 0 8px 32px 0 rgba(30,41,59,0.05);
+    }
+    
+    .card-title {
+      color: #0ea5e9;
+      font-weight: 600;
+      letter-spacing: -0.015em;
+    }
+    
+    html.light .card-title {
+      color: #0369a1;
+    }
+    
     .neon {
       color: #fff;
-      text-shadow: 0 0 6px #0ff, 0 0 15px #0ff, 0 0 30px #0ff;
+      text-shadow: 0 0 4px rgba(56,189,248,0.5);
     }
+    
     html.light .neon {
       color: #0369a1;
-      text-shadow: 0 0 6px #38bdf8, 0 0 15px #7dd3fc;
+      text-shadow: 0 0 4px rgba(14,165,233,0.2);
     }
+    
     .sidebar-btn:focus {
-      outline: 2px solid #38bdf8;
+      outline: 2px solid var(--primary);
       outline-offset: 2px;
     }
+    
     /* Sidebar: responsive and sticky at left for desktop */
     .sidebar {
       z-index: 50;
       transition: transform 0.3s;
     }
+    
     @media (min-width: 1024px) {
       .sidebar {
         position: fixed;
@@ -63,6 +102,7 @@
         transform: none !important;
       }
     }
+    
     @media (max-width: 1024px) {
       .sidebar {
         position: fixed;
@@ -78,45 +118,41 @@
         transform: translateX(0);
       }
     }
+    
     @media (max-width: 640px) {
       .sidebar {
         width: 90vw;
         max-width: 98vw;
       }
     }
+    
     .modern-btn {
-      background: linear-gradient(92deg, #0ea5e9 0%, #38bdf8 100%);
+      background: linear-gradient(92deg, var(--primary) 0%, var(--primary-light) 100%);
       color: #fff;
-      box-shadow: 0 2px 12px 0 rgba(56,189,248,0.16);
+      box-shadow: 0 4px 16px 0 rgba(56,189,248,0.25);
       transition: transform 0.15s, box-shadow 0.15s;
+      font-weight: 500;
     }
+    
     .modern-btn:hover, .modern-btn:focus {
-      transform: translateY(-2px) scale(1.045);
-      box-shadow: 0 6px 22px 0 rgba(56,189,248,0.28);
-      background: linear-gradient(92deg, #38bdf8 0%, #0ea5e9 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 22px 0 rgba(56,189,248,0.35);
+      background: linear-gradient(92deg, var(--primary-light) 0%, var(--primary) 100%);
     }
-    html.light .modern-btn {
-      background: linear-gradient(92deg, #0ea5e9 0%, #38bdf8 100%);
-      color: #fff;
-    }
+    
     .device-btn {
-      border: 2px solid #38bdf8;
+      border: 2px solid var(--primary);
       background: transparent;
-      color: #38bdf8;
+      color: var(--primary);
       transition: background 0.15s, color 0.15s;
+      font-weight: 500;
     }
+    
     .device-btn.active, .device-btn:hover {
-      background: #38bdf8;
+      background: var(--primary);
       color: #fff;
     }
-    html.light .device-btn {
-      border: 2px solid #0ea5e9;
-      color: #0ea5e9;
-    }
-    html.light .device-btn.active, html.light .device-btn:hover {
-      background: #0ea5e9;
-      color: #fff;
-    }
+    
     .back-btn, .project-link {
       display: inline-flex;
       align-items: center;
@@ -130,32 +166,131 @@
       transition: all .17s;
       margin-right: 1rem;
       margin-bottom: 0.75rem;
-      background: linear-gradient(92deg, #0ea5e9 0%, #38bdf8 100%);
+      background: linear-gradient(92deg, var(--primary) 0%, var(--primary-light) 100%);
       color: #fff;
     }
+    
     .back-btn:hover, .project-link:hover {
-      background: linear-gradient(92deg, #38bdf8 0%, #0ea5e9 100%);
+      background: linear-gradient(92deg, var(--primary-light) 0%, var(--primary) 100%);
       color: #fff;
-      transform: translateY(-2px) scale(1.035);
+      transform: translateY(-2px);
       text-decoration: none;
     }
+    
     .secondary-link {
       background: #fff;
-      color: #0ea5e9;
-      border: 2px solid #0ea5e9;
+      color: var(--primary);
+      border: 2px solid var(--primary);
     }
+    
     .secondary-link:hover {
-      background: #0ea5e9;
+      background: var(--primary);
       color: #fff;
     }
+    
     html.dark .secondary-link {
-      background: #1e293b;
-      color: #38bdf8;
-      border: 2px solid #38bdf8;
+      background: var(--dark-bg-2);
+      color: var(--primary-light);
+      border: 2px solid var(--primary-light);
     }
+    
     html.dark .secondary-link:hover {
-      background: #38bdf8;
+      background: var(--primary-light);
       color: #fff;
+    }
+    
+    /* Improved form styling */
+    .form-input {
+      background: rgba(30,41,59,0.1);
+      border: 1px solid rgba(30,41,59,0.1);
+      border-radius: 12px;
+      transition: all 0.2s;
+    }
+    
+    html.dark .form-input {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: #e2e8f0;
+    }
+    
+    .form-input:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(59,130,246,0.2);
+    }
+    
+    /* Improved stats cards */
+    .stats-card {
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    
+    .stats-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+    }
+    
+    /* Modern scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    
+    ::-webkit-scrollbar-track {
+      background: rgba(30,41,59,0.05);
+    }
+    
+    ::-webkit-scrollbar-thumb {
+      background: rgba(56,189,248,0.3);
+      border-radius: 4px;
+    }
+    
+    html.dark ::-webkit-scrollbar-thumb {
+      background: rgba(56,189,248,0.5);
+    }
+    
+    /* Animation for chart */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .animate-fadein {
+      animation: fadeIn 0.5s ease-out forwards;
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    /* Improved contrast for text */
+    html.dark .text-muted {
+      color: #94a3b8;
+    }
+    
+    html.light .text-muted {
+      color: #64748b;
+    }
+    
+    .value-text {
+      font-weight: 700;
+      font-size: 1.75rem;
+      letter-spacing: -0.025em;
+    }
+    
+    html.dark .value-text {
+      color: #f1f5f9;
+    }
+    
+    html.light .value-text {
+      color: #0f172a;
     }
   </style>
 </head>
@@ -165,228 +300,324 @@
     <a href="../index.html" class="back-btn">
       <i class="fas fa-arrow-left"></i> Back to Portfolio
     </a>
-    <a href="https://github.com/jersonen/projects-code/blob/main/ecommerce-platform-demo.html"
+    <a href="https://github.com/jersonen/projects-code/blob/main/fintrack-pro-demo.html"
       class="project-link secondary-link"
       target="_blank"
       rel="noopener noreferrer">
       <i class="fab fa-github"></i> View Code
     </a>
   </div>
+  
   <!-- Sidebar -->
-  <nav id="sidebar" class="sidebar glass shadow-xl z-50">
-    <div class="flex items-center mb-8 gap-3">
-      <i class="bi bi-credit-card-2-front-fill text-3xl text-cyan-400"></i>
-      <span class="text-xl font-bold neon">Fintech Dashboard</span>
-    </div>
-    <ul class="flex-1 flex flex-col gap-3">
-      <li>
-        <button class="sidebar-btn flex items-center w-full gap-3 p-3 rounded-lg hover:bg-cyan-700/30 transition text-base font-medium">
-          <i class="bi bi-speedometer2 text-cyan-300"></i> Overview
+  <nav id="sidebar" class="sidebar shadow-xl z-50">
+    <div class="p-5">
+      <div class="flex items-center mb-8 gap-3">
+        <i class="bi bi-credit-card-2-front-fill text-3xl text-cyan-400"></i>
+        <span class="text-xl font-bold neon">Fintech Pro</span>
+      </div>
+      <ul class="flex-1 flex flex-col gap-1">
+        <li>
+          <button class="sidebar-btn flex items-center w-full gap-3 p-3 rounded-xl hover:bg-cyan-700/20 transition text-base font-medium">
+            <i class="bi bi-speedometer2 text-cyan-300"></i> Overview
+          </button>
+        </li>
+        <li>
+          <button class="sidebar-btn flex items-center w-full gap-3 p-3 rounded-xl hover:bg-cyan-700/20 transition">
+            <i class="bi bi-cash-coin text-cyan-300"></i> Accounts
+          </button>
+        </li>
+        <li>
+          <button class="sidebar-btn flex items-center w-full gap-3 p-3 rounded-xl hover:bg-cyan-700/20 transition">
+            <i class="bi bi-arrow-left-right text-cyan-300"></i> Transactions
+          </button>
+        </li>
+        <li>
+          <button class="sidebar-btn flex items-center w-full gap-3 p-3 rounded-xl hover:bg-cyan-700/20 transition">
+            <i class="bi bi-bar-chart-line text-cyan-300"></i> Analytics
+          </button>
+        </li>
+        <li>
+          <button class="sidebar-btn flex items-center w-full gap-3 p-3 rounded-xl hover:bg-cyan-700/20 transition">
+            <i class="bi bi-gear text-cyan-300"></i> Settings
+          </button>
+        </li>
+      </ul>
+      <div class="mt-auto flex flex-col gap-2 pt-6">
+        <button class="sidebar-btn flex items-center gap-3 w-full p-3 rounded-xl hover:bg-cyan-700/20 transition">
+          <i class="bi bi-person-circle text-cyan-300"></i> Profile
         </button>
-      </li>
-      <li>
-        <button class="sidebar-btn flex items-center w-full gap-3 p-3 rounded-lg hover:bg-cyan-700/30 transition">
-          <i class="bi bi-cash-coin text-cyan-300"></i> Accounts
+        <button class="sidebar-btn flex items-center gap-3 w-full p-3 rounded-xl hover:bg-red-500/20 transition">
+          <i class="bi bi-box-arrow-right text-rose-400"></i> Logout
         </button>
-      </li>
-      <li>
-        <button class="sidebar-btn flex items-center w-full gap-3 p-3 rounded-lg hover:bg-cyan-700/30 transition">
-          <i class="bi bi-arrow-left-right text-cyan-300"></i> Transactions
-        </button>
-      </li>
-      <li>
-        <button class="sidebar-btn flex items-center w-full gap-3 p-3 rounded-lg hover:bg-cyan-700/30 transition">
-          <i class="bi bi-bar-chart-line text-cyan-300"></i> Analytics
-        </button>
-      </li>
-      <li>
-        <button class="sidebar-btn flex items-center w-full gap-3 p-3 rounded-lg hover:bg-cyan-700/30 transition">
-          <i class="bi bi-gear text-cyan-300"></i> Settings
-        </button>
-      </li>
-    </ul>
-    <div class="mt-auto flex flex-col gap-2">
-      <button class="sidebar-btn flex items-center gap-3 w-full p-3 rounded-lg hover:bg-cyan-700/30 transition">
-        <i class="bi bi-person-circle text-cyan-300"></i> Profile
-      </button>
-      <button class="sidebar-btn flex items-center gap-3 w-full p-3 rounded-lg hover:bg-red-500/20 transition">
-        <i class="bi bi-box-arrow-right text-rose-400"></i> Logout
-      </button>
+      </div>
     </div>
   </nav>
+  
   <!-- Topbar for mobile and header bar -->
-  <div class="lg:hidden flex items-center justify-between p-4 bg-slate-800/60 glass shadow-md sticky top-0 z-40">
+  <div class="lg:hidden flex items-center justify-between p-4 glass shadow-md sticky top-0 z-40">
     <button id="sidebarToggle" class="text-cyan-300 text-2xl focus:outline-none" aria-label="Open menu">
       <i class="bi bi-list"></i>
     </button>
-    <span class="text-lg font-bold neon">Fintech Dashboard</span>
-    <button id="themeToggle" class="ml-2 text-2xl text-cyan-400" aria-label="Toggle dark/light mode">
-      <i id="themeIcon" class="bi bi-moon-stars-fill"></i>
-    </button>
-    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="avatar" class="rounded-full w-8 h-8 border-2 border-cyan-400" />
+    <span class="text-lg font-bold neon">Fintech Pro</span>
+    <div class="flex items-center gap-2">
+      <button id="themeToggle" class="ml-2 text-xl text-cyan-400" aria-label="Toggle dark/light mode">
+        <i id="themeIcon" class="bi bi-moon-stars-fill"></i>
+      </button>
+      <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="avatar" class="rounded-full w-8 h-8 border-2 border-cyan-400" />
+    </div>
   </div>
+  
   <!-- Header bar for desktop -->
-  <div class="hidden lg:flex items-center justify-between px-4 lg:px-10 py-4 lg:py-6 bg-transparent ml-0 lg:ml-64">
+  <div class="hidden lg:flex items-center justify-between px-4 lg:px-8 py-4 glass shadow-sm ml-0 lg:ml-64">
     <div class="flex items-center gap-4">
       <span class="text-xl font-bold neon">Fintech Dashboard</span>
       <!-- Device switcher -->
       <div class="flex items-center gap-2 ml-4 lg:ml-6">
-        <button class="device-btn px-3 py-1 rounded-lg flex items-center gap-1 text-xs lg:text-sm active" data-device="desktop" title="Desktop view">
+        <button class="device-btn px-3 py-1 rounded-lg flex items-center gap-1 text-sm active" data-device="desktop" title="Desktop view">
           <i class="bi bi-pc-display-horizontal"></i>
           Desktop
         </button>
-        <button class="device-btn px-3 py-1 rounded-lg flex items-center gap-1 text-xs lg:text-sm" data-device="tablet" title="Tablet view">
+        <button class="device-btn px-3 py-1 rounded-lg flex items-center gap-1 text-sm" data-device="tablet" title="Tablet view">
           <i class="bi bi-tablet"></i>
           Tablet
         </button>
-        <button class="device-btn px-3 py-1 rounded-lg flex items-center gap-1 text-xs lg:text-sm" data-device="mobile" title="Mobile view">
+        <button class="device-btn px-3 py-1 rounded-lg flex items-center gap-1 text-sm" data-device="mobile" title="Mobile view">
           <i class="bi bi-phone"></i>
           Mobile
         </button>
       </div>
     </div>
     <div class="flex items-center gap-4">
-      <button id="themeToggleDesktop" class="text-2xl text-cyan-400" aria-label="Toggle dark/light mode">
+      <div class="relative">
+        <i class="bi bi-bell absolute left-3 top-1/2 transform -translate-y-1/2 text-cyan-300"></i>
+        <input type="text" placeholder="Search..." class="form-input pl-10 py-2 w-48">
+      </div>
+      <button id="themeToggleDesktop" class="text-xl text-cyan-400" aria-label="Toggle dark/light mode">
         <i id="themeIconDesktop" class="bi bi-moon-stars-fill"></i>
       </button>
-      <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="avatar" class="rounded-full w-8 lg:w-10 h-8 lg:h-10 border-2 border-cyan-400" />
+      <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="avatar" class="rounded-full w-10 h-10 border-2 border-cyan-400" />
     </div>
   </div>
+  
   <!-- Main Content -->
   <main id="mainContent" class="lg:ml-64 flex flex-col min-h-screen transition-all">
-    <section class="p-3 sm:p-4 md:p-6 lg:p-10 flex flex-col gap-8">
+    <section class="p-4 sm:p-6 md:p-8 lg:p-10 flex flex-col gap-8">
       <!-- Device preview wrapper -->
       <div id="devicePreview" class="transition-all duration-300 relative w-full">
         <!-- Stats Cards -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 sm:gap-6">
-          <div class="glass p-4 sm:p-5 flex flex-col gap-2 shadow-lg">
-            <div class="flex items-center gap-2">
-              <i class="bi bi-wallet2 text-2xl text-cyan-300"></i>
-              <span class="font-bold text-base sm:text-lg">Total Balance</span>
+        <div class="stats-grid grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 sm:gap-6">
+          <div class="glass stats-card p-5 flex flex-col gap-3 shadow-lg animate-fadein">
+            <div class="flex items-center gap-3">
+              <div class="bg-blue-500/10 p-3 rounded-xl">
+                <i class="bi bi-wallet2 text-2xl text-blue-400"></i>
+              </div>
+              <span class="card-title font-bold">Total Balance</span>
             </div>
-            <span class="text-2xl sm:text-3xl font-bold neon">$42,800.00</span>
-            <span class="text-xs mt-1 text-cyan-200">+3.2% from last month</span>
+            <span class="value-text">$42,800.00</span>
+            <span class="text-sm mt-1 text-muted flex items-center gap-1">
+              <i class="bi bi-arrow-up text-green-400"></i> +3.2% from last month
+            </span>
           </div>
-          <div class="glass p-4 sm:p-5 flex flex-col gap-2 shadow-lg">
-            <div class="flex items-center gap-2">
-              <i class="bi bi-arrow-down-circle text-2xl text-green-300"></i>
-              <span class="font-bold text-base sm:text-lg">Income</span>
+          
+          <div class="glass stats-card p-5 flex flex-col gap-3 shadow-lg animate-fadein" style="animation-delay: 0.1s">
+            <div class="flex items-center gap-3">
+              <div class="bg-green-500/10 p-3 rounded-xl">
+                <i class="bi bi-arrow-down-circle text-2xl text-green-400"></i>
+              </div>
+              <span class="card-title font-bold">Income</span>
             </div>
-            <span class="text-2xl sm:text-3xl font-bold text-green-200">$9,200.00</span>
-            <span class="text-xs mt-1 text-green-300">+5.4% from last month</span>
+            <span class="value-text">$9,200.00</span>
+            <span class="text-sm mt-1 text-muted flex items-center gap-1">
+              <i class="bi bi-arrow-up text-green-400"></i> +5.4% from last month
+            </span>
           </div>
-          <div class="glass p-4 sm:p-5 flex flex-col gap-2 shadow-lg">
-            <div class="flex items-center gap-2">
-              <i class="bi bi-arrow-up-circle text-2xl text-rose-300"></i>
-              <span class="font-bold text-base sm:text-lg">Expenses</span>
+          
+          <div class="glass stats-card p-5 flex flex-col gap-3 shadow-lg animate-fadein" style="animation-delay: 0.2s">
+            <div class="flex items-center gap-3">
+              <div class="bg-rose-500/10 p-3 rounded-xl">
+                <i class="bi bi-arrow-up-circle text-2xl text-rose-400"></i>
+              </div>
+              <span class="card-title font-bold">Expenses</span>
             </div>
-            <span class="text-2xl sm:text-3xl font-bold text-rose-200">$3,480.00</span>
-            <span class="text-xs mt-1 text-rose-300">-1.1% from last month</span>
+            <span class="value-text">$3,480.00</span>
+            <span class="text-sm mt-1 text-muted flex items-center gap-1">
+              <i class="bi bi-arrow-down text-green-400"></i> -1.1% from last month
+            </span>
           </div>
-          <div class="glass p-4 sm:p-5 flex flex-col gap-2 shadow-lg">
-            <div class="flex items-center gap-2">
-              <i class="bi bi-graph-up-arrow text-2xl text-yellow-300"></i>
-              <span class="font-bold text-base sm:text-lg">Investments</span>
+          
+          <div class="glass stats-card p-5 flex flex-col gap-3 shadow-lg animate-fadein" style="animation-delay: 0.3s">
+            <div class="flex items-center gap-3">
+              <div class="bg-amber-500/10 p-3 rounded-xl">
+                <i class="bi bi-graph-up-arrow text-2xl text-amber-400"></i>
+              </div>
+              <span class="card-title font-bold">Investments</span>
             </div>
-            <span class="text-2xl sm:text-3xl font-bold text-yellow-200">$18,300.00</span>
-            <span class="text-xs mt-1 text-yellow-300">+7.8% from last month</span>
+            <span class="value-text">$18,300.00</span>
+            <span class="text-sm mt-1 text-muted flex items-center gap-1">
+              <i class="bi bi-arrow-up text-green-400"></i> +7.8% from last month
+            </span>
           </div>
         </div>
+        
         <!-- Charts & Lists -->
         <div class="grid grid-cols-1 xl:grid-cols-3 gap-6 mt-6">
           <!-- Chart -->
-          <div class="glass p-4 sm:p-6 col-span-2 flex flex-col min-h-[320px]">
-            <div class="flex items-center justify-between mb-4">
-              <span class="font-semibold text-base sm:text-lg">Balance Overview</span>
-              <select id="chartRange" class="bg-slate-700 text-cyan-200 rounded px-3 py-1">
-                <option value="6m">Last 6 Months</option>
-                <option value="12m">Last 12 Months</option>
-              </select>
+          <div class="glass p-5 col-span-2 flex flex-col min-h-[320px]">
+            <div class="flex items-center justify-between mb-5">
+              <h2 class="text-lg font-semibold card-title">Balance Overview</h2>
+              <div class="flex gap-2">
+                <select id="chartRange" class="form-input px-3 py-1 text-sm">
+                  <option value="6m">Last 6 Months</option>
+                  <option value="12m">Last 12 Months</option>
+                </select>
+                <button class="form-input px-3 py-1 text-sm flex items-center gap-1">
+                  <i class="bi bi-download"></i> Export
+                </button>
+              </div>
             </div>
             <div class="relative flex-1 min-h-[200px]">
               <canvas id="balanceChart" class="w-full h-48 sm:h-64 !important"></canvas>
             </div>
           </div>
+          
           <!-- Transactions -->
-          <div class="glass p-4 sm:p-6 flex flex-col">
-            <span class="font-semibold text-base sm:text-lg mb-4">Recent Transactions</span>
-            <ul class="flex flex-col gap-4">
-              <li class="flex items-center justify-between">
+          <div class="glass p-5 flex flex-col">
+            <div class="flex justify-between items-center mb-5">
+              <h2 class="text-lg font-semibold card-title">Recent Transactions</h2>
+              <button class="text-sm text-cyan-400 flex items-center gap-1">
+                View all <i class="bi bi-chevron-right"></i>
+              </button>
+            </div>
+            <ul class="flex flex-col gap-4 overflow-y-auto max-h-[300px]">
+              <li class="flex items-center justify-between p-3 bg-slate-800/20 rounded-xl">
                 <div class="flex items-center gap-3">
-                  <i class="bi bi-bag-check-fill text-green-400 text-xl"></i>
-                  <span class="font-medium">Payment from Stripe</span>
+                  <div class="bg-green-500/20 p-2 rounded-lg">
+                    <i class="bi bi-bag-check-fill text-green-400 text-lg"></i>
+                  </div>
+                  <div>
+                    <span class="font-medium">Payment from Stripe</span>
+                    <div class="text-xs text-muted">Today, 09:30 AM</div>
+                  </div>
                 </div>
-                <span class="font-semibold text-green-300">+$2,340.00</span>
+                <span class="font-semibold text-green-400">+$2,340.00</span>
               </li>
-              <li class="flex items-center justify-between">
+              <li class="flex items-center justify-between p-3 bg-slate-800/20 rounded-xl">
                 <div class="flex items-center gap-3">
-                  <i class="bi bi-shop text-yellow-400 text-xl"></i>
-                  <span class="font-medium">Amazon Shopping</span>
+                  <div class="bg-amber-500/20 p-2 rounded-lg">
+                    <i class="bi bi-shop text-amber-400 text-lg"></i>
+                  </div>
+                  <div>
+                    <span class="font-medium">Amazon Shopping</span>
+                    <div class="text-xs text-muted">Yesterday, 04:15 PM</div>
+                  </div>
                 </div>
-                <span class="font-semibold text-rose-300">-$120.00</span>
+                <span class="font-semibold text-rose-400">-$120.00</span>
               </li>
-              <li class="flex items-center justify-between">
+              <li class="flex items-center justify-between p-3 bg-slate-800/20 rounded-xl">
                 <div class="flex items-center gap-3">
-                  <i class="bi bi-paypal text-blue-400 text-xl"></i>
-                  <span class="font-medium">PayPal Refund</span>
+                  <div class="bg-blue-500/20 p-2 rounded-lg">
+                    <i class="bi bi-paypal text-blue-400 text-lg"></i>
+                  </div>
+                  <div>
+                    <span class="font-medium">PayPal Refund</span>
+                    <div class="text-xs text-muted">Jan 12, 11:20 AM</div>
+                  </div>
                 </div>
-                <span class="font-semibold text-green-300">+$80.00</span>
+                <span class="font-semibold text-green-400">+$80.00</span>
               </li>
-              <li class="flex items-center justify-between">
+              <li class="flex items-center justify-between p-3 bg-slate-800/20 rounded-xl">
                 <div class="flex items-center gap-3">
-                  <i class="bi bi-credit-card text-cyan-400 text-xl"></i>
-                  <span class="font-medium">Card Payment</span>
+                  <div class="bg-cyan-500/20 p-2 rounded-lg">
+                    <i class="bi bi-credit-card text-cyan-400 text-lg"></i>
+                  </div>
+                  <div>
+                    <span class="font-medium">Card Payment</span>
+                    <div class="text-xs text-muted">Jan 10, 02:45 PM</div>
+                  </div>
                 </div>
-                <span class="font-semibold text-rose-300">-$400.00</span>
+                <span class="font-semibold text-rose-400">-$400.00</span>
               </li>
             </ul>
-            <button class="mt-6 w-full py-2 rounded-lg modern-btn flex items-center justify-center gap-2 transition">
-              <i class="bi bi-arrow-right-circle"></i> View All
-            </button>
           </div>
         </div>
+        
         <!-- Action Buttons -->
         <div class="flex flex-wrap gap-4 mt-8">
-          <button class="flex items-center gap-2 px-6 py-3 rounded-lg modern-btn font-semibold shadow-lg">
+          <button class="flex items-center gap-2 px-6 py-3 rounded-xl modern-btn font-semibold">
             <i class="bi bi-arrow-down-up"></i> Transfer Money
           </button>
-          <button class="flex items-center gap-2 px-6 py-3 rounded-lg modern-btn font-semibold shadow-lg bg-gradient-to-r from-green-400 to-emerald-600 hover:from-green-500 hover:to-emerald-700">
+          <button class="flex items-center gap-2 px-6 py-3 rounded-xl modern-btn font-semibold bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700">
             <i class="bi bi-plus-circle"></i> New Account
           </button>
-          <button class="flex items-center gap-2 px-6 py-3 rounded-lg modern-btn font-semibold shadow-lg bg-gradient-to-r from-yellow-400 to-amber-600 hover:from-yellow-500 hover:to-amber-700">
+          <button class="flex items-center gap-2 px-6 py-3 rounded-xl modern-btn font-semibold bg-gradient-to-r from-yellow-500 to-amber-600 hover:from-yellow-600 hover:to-amber-700">
             <i class="bi bi-bar-chart"></i> Investment
+          </button>
+          <button class="flex items-center gap-2 px-6 py-3 rounded-xl bg-slate-800/30 hover:bg-slate-800/50 text-cyan-400 font-medium border border-cyan-400/30">
+            <i class="bi bi-credit-card"></i> Manage Cards
           </button>
         </div>
       </div>
+      
       <!-- Contact Section -->
-      <section class="glass p-4 sm:p-6 mt-10 rounded-2xl max-w-3xl mx-auto w-full shadow-lg">
-        <h2 class="text-xl sm:text-2xl font-bold neon mb-4 flex items-center gap-2">
-          <i class="bi bi-envelope-at-fill text-cyan-400"></i> Contact Us
+      <section class="glass p-6 mt-10 rounded-2xl max-w-3xl mx-auto w-full shadow-lg">
+        <h2 class="text-xl sm:text-2xl font-bold neon mb-5 flex items-center gap-3">
+          <div class="bg-cyan-500/20 p-2 rounded-xl">
+            <i class="bi bi-envelope-at-fill text-cyan-400 text-xl"></i>
+          </div>
+          Contact Support
         </h2>
         <form id="contactForm" class="flex flex-col gap-5" autocomplete="off">
-          <div class="flex flex-col gap-1">
-            <label for="name" class="text-sm font-medium">Name</label>
-            <input id="name" name="name" type="text" required class="bg-slate-800 rounded-md p-3 outline-none text-white placeholder:text-slate-400 focus:ring-2 focus:ring-cyan-400 transition" placeholder="Your name"/>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <div class="flex flex-col gap-1">
+              <label for="name" class="text-sm font-medium text-muted">Name</label>
+              <input id="name" name="name" type="text" required class="form-input p-3" placeholder="Your name"/>
+            </div>
+            <div class="flex flex-col gap-1">
+              <label for="email" class="text-sm font-medium text-muted">Email</label>
+              <input id="email" name="email" type="email" required class="form-input p-3" placeholder="your@email.com"/>
+            </div>
           </div>
           <div class="flex flex-col gap-1">
-            <label for="email" class="text-sm font-medium">Email</label>
-            <input id="email" name="email" type="email" required class="bg-slate-800 rounded-md p-3 outline-none text-white placeholder:text-slate-400 focus:ring-2 focus:ring-cyan-400 transition" placeholder="your@email.com"/>
+            <label for="subject" class="text-sm font-medium text-muted">Subject</label>
+            <input id="subject" name="subject" type="text" required class="form-input p-3" placeholder="How can we help?"/>
           </div>
           <div class="flex flex-col gap-1">
-            <label for="message" class="text-sm font-medium">Message</label>
-            <textarea id="message" name="message" required rows="4" class="bg-slate-800 rounded-md p-3 outline-none text-white placeholder:text-slate-400 focus:ring-2 focus:ring-cyan-400 transition" placeholder="Type your message..."></textarea>
+            <label for="message" class="text-sm font-medium text-muted">Message</label>
+            <textarea id="message" name="message" required rows="4" class="form-input p-3" placeholder="Type your message..."></textarea>
           </div>
-          <button type="submit" class="w-full py-3 rounded-lg modern-btn text-lg font-bold flex items-center justify-center gap-2">
+          <button type="submit" class="w-full py-3 rounded-xl modern-btn text-lg font-bold flex items-center justify-center gap-2 mt-2">
             <i class="bi bi-send"></i> Send Message
           </button>
           <div id="contactMsg" class="hidden mt-2 text-green-400 font-semibold"></div>
         </form>
       </section>
     </section>
-    <footer class="py-6 text-center text-slate-400 text-sm">
-      &copy; 2025 FintechDashboard. Powered by <span class="text-cyan-400 font-semibold">modern web technologies</span>.
+    
+    <footer class="py-8 text-center text-muted text-sm mt-8">
+      <div class="max-w-7xl mx-auto px-4">
+        <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+          <div class="flex items-center gap-3">
+            <i class="bi bi-credit-card-2-front-fill text-cyan-400"></i>
+            <span class="font-bold">Fintech Dashboard Pro</span>
+          </div>
+          <div class="flex gap-4">
+            <a href="#" class="hover:text-cyan-400">Privacy Policy</a>
+            <a href="#" class="hover:text-cyan-400">Terms of Service</a>
+            <a href="#" class="hover:text-cyan-400">Support</a>
+          </div>
+          <div class="flex gap-3">
+            <a href="#" class="text-xl hover:text-cyan-400"><i class="bi bi-twitter"></i></a>
+            <a href="#" class="text-xl hover:text-cyan-400"><i class="bi bi-linkedin"></i></a>
+            <a href="#" class="text-xl hover:text-cyan-400"><i class="bi bi-facebook"></i></a>
+          </div>
+        </div>
+        <div class="mt-6 pt-6 border-t border-slate-700/50">
+          &copy; 2025 FintechDashboard. All rights reserved. Powered by <span class="text-cyan-400 font-semibold">modern web technologies</span>.
+        </div>
+      </div>
     </footer>
   </main>
+  
   <!-- Chart.js CDN -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script>
@@ -416,6 +647,7 @@
         }
       });
     }
+    
     // Device preview buttons
     const deviceBtns = document.querySelectorAll('.device-btn');
     const devicePreview = document.getElementById('devicePreview');
@@ -426,9 +658,9 @@
         ? '100%' : device === 'tablet'
         ? '800px' : '430px';
       devicePreview.style.margin = device === 'desktop' ? '0 auto' : '0 auto';
-      devicePreview.style.borderRadius = device === 'desktop' ? '0' : '2rem';
+      devicePreview.style.borderRadius = device === 'desktop' ? '0' : '1.5rem';
       devicePreview.style.border = device === 'desktop' ? 'none' : '6px solid #38bdf8';
-      devicePreview.style.boxShadow = device === 'desktop' ? 'none' : '0 6px 32px 0 rgba(56,189,248,0.25)';
+      devicePreview.style.boxShadow = device === 'desktop' ? 'none' : '0 12px 48px 0 rgba(56,189,248,0.15)';
       devicePreview.style.overflow = device === 'desktop' ? 'visible' : 'hidden';
       devicePreview.style.background = device === 'desktop' ? 'none' : 'rgba(0,0,0,0.05)';
       devicePreview.style.transition = 'all 0.3s';
@@ -437,10 +669,12 @@
       btn.addEventListener('click', () => setDevice(btn.dataset.device));
     });
     setDevice('desktop'); // Default view
+    
     // Responsive chart - realistic fintech curve
     const ctx = document.getElementById('balanceChart').getContext('2d');
     let chartRange = '6m';
     let balanceChart;
+    
     // Simulated up-and-down values, not just decreasing
     const chartData = {
       '6m': {
@@ -448,12 +682,16 @@
         datasets: [
           {
             label: 'Balance',
-            data: [36000, 37200, 39000, 38000, 39000, 42800], // up and down, not just decreasing
+            data: [36000, 37200, 39000, 38000, 39000, 42800],
             fill: true,
-            backgroundColor: 'rgba(34,211,238,0.10)',
-            borderColor: '#22d3ee',
-            tension: 0.4,
-            pointBackgroundColor: '#0ff'
+            backgroundColor: 'rgba(56,189,248,0.12)',
+            borderColor: '#38bdf8',
+            borderWidth: 2,
+            pointBackgroundColor: '#fff',
+            pointBorderColor: '#38bdf8',
+            pointBorderWidth: 2,
+            pointRadius: 4,
+            tension: 0.4
           }
         ]
       },
@@ -467,14 +705,19 @@
             label: 'Balance',
             data: [28000, 29500, 32000, 34500, 35500, 36000, 37000, 39500, 41000, 40500, 43000, 42800],
             fill: true,
-            backgroundColor: 'rgba(34,211,238,0.10)',
-            borderColor: '#22d3ee',
-            tension: 0.4,
-            pointBackgroundColor: '#0ff'
+            backgroundColor: 'rgba(56,189,248,0.12)',
+            borderColor: '#38bdf8',
+            borderWidth: 2,
+            pointBackgroundColor: '#fff',
+            pointBorderColor: '#38bdf8',
+            pointBorderWidth: 2,
+            pointRadius: 4,
+            tension: 0.4
           }
         ]
       }
     };
+    
     function renderChart(range) {
       if (balanceChart) balanceChart.destroy();
       balanceChart = new Chart(ctx, {
@@ -485,22 +728,44 @@
             legend: { display: false },
             tooltip: {
               backgroundColor: '#1e293b',
-              borderColor: '#22d3ee',
+              borderColor: '#38bdf8',
               borderWidth: 1,
-              titleColor: '#22d3ee',
-              bodyColor: '#fff'
+              titleColor: '#38bdf8',
+              bodyColor: '#e2e8f0',
+              padding: 12,
+              displayColors: false,
+              callbacks: {
+                label: function(context) {
+                  return '$' + context.parsed.y.toLocaleString();
+                }
+              }
             }
           },
-          layout: { padding: 0 },
+          layout: { padding: 10 },
           scales: {
             x: {
-              grid: { color: 'rgba(30,41,59,0.12)' },
-              ticks: { color: '#a5f3fc', font: { size: 11 } }
+              grid: { 
+                color: 'rgba(30,41,59,0.15)',
+                drawBorder: false
+              },
+              ticks: { 
+                color: document.documentElement.classList.contains('dark') ? '#94a3b8' : '#64748b',
+                font: { size: 11 } 
+              }
             },
             y: {
               beginAtZero: false,
-              grid: { color: 'rgba(30,41,59,0.08)' },
-              ticks: { color: '#a5f3fc', font: { size: 11 } }
+              grid: { 
+                color: 'rgba(30,41,59,0.10)',
+                drawBorder: false
+              },
+              ticks: { 
+                color: document.documentElement.classList.contains('dark') ? '#94a3b8' : '#64748b',
+                font: { size: 11 },
+                callback: function(value) {
+                  return '$' + value.toLocaleString();
+                }
+              }
             }
           },
           responsive: true,
@@ -508,11 +773,12 @@
         }
       });
     }
+    
     document.getElementById('chartRange').addEventListener('change', (e) => {
       chartRange = e.target.value;
       renderChart(chartRange);
     });
-    renderChart(chartRange);
+    
     // Light/Dark mode toggle (sync both desktop and mobile)
     function setTheme(theme) {
       document.documentElement.classList.remove('light', 'dark');
@@ -524,28 +790,24 @@
       document.getElementById('themeIconDesktop').className = theme === 'dark'
         ? 'bi bi-moon-stars-fill'
         : 'bi bi-brightness-high-fill';
-      document.querySelectorAll('input, textarea').forEach(el => {
-        if (theme === 'dark') {
-          el.classList.remove('bg-white', 'text-slate-800');
-          el.classList.add('bg-slate-800', 'text-white');
-        } else {
-          el.classList.remove('bg-slate-800', 'text-white');
-          el.classList.add('bg-white', 'text-slate-800');
-        }
-      });
+      renderChart(chartRange); // Re-render chart to update colors
     }
+    
     function toggleTheme() {
       const current = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
       setTheme(current === 'dark' ? 'light' : 'dark');
     }
+    
     document.getElementById('themeToggle').addEventListener('click', toggleTheme);
     document.getElementById('themeToggleDesktop').addEventListener('click', toggleTheme);
+    
     // Initial theme setup
     let initialTheme = localStorage.getItem('dashboard-theme');
     if (!initialTheme) {
       initialTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
     }
     setTheme(initialTheme);
+    
     // Contact Form
     const contactForm = document.getElementById('contactForm');
     const contactMsg = document.getElementById('contactMsg');
@@ -559,6 +821,7 @@
         contactMsg.classList.add('hidden');
       }, 3500);
     });
+    
     // Ensure menu toggle button always works
     window.addEventListener('resize', () => {
       if (window.innerWidth >= 1024) {
@@ -567,6 +830,9 @@
         document.body.style.overflow = '';
       }
     });
+    
+    // Initial chart render
+    renderChart(chartRange);
   </script>
 </body>
 </html>
