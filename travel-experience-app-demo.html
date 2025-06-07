@@ -3,230 +3,305 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Travel Experience App Demo</title>
+  <title>Modern Travel Experience App</title>
+  <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAyklEQVR4nGNgGAVDHvz//5+BYgDk+O/evUuW2r9//zJgM0CkpqbG7uXLl3wE1f/9+5cBmwF8fHx6r1694iVoAC4D2NjYxJ4+fcpJ0AAcBvz//58B6HgGQk4gZAAbG5sI0BBeogaQYgAQ8AI9wUvQAFIMAAI+oAY+ggaQYgAQ8AM18RM0gBQDgEAAqIGfoAGkGAAEgkANAgQNIMUAIBACahAkaAApBgCBEFCDEEEDQAb8//+fEZcBQCAE1CBEmgFg9YQMAIIBAQAcB0oN8vO9YwAAAABJRU5ErkJggg==" />
   <!-- Google Fonts & Icons -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <style>
     :root {
-      --primary: #0099ff;
+      --primary: #2563eb;
+      --primary-light: #3b82f6;
       --secondary: #1e293b;
-      --bg: #f7f9fb;
-      --accent: #ffe066;
-      --white: #fff;
-      --radius: 18px;
-      --shadow: 0 8px 32px rgba(0,0,0,.11);
-      --transition: 0.2s cubic-bezier(.4,0,.2,1);
-      --gradient: linear-gradient(120deg, var(--primary) 60%, var(--accent) 100%);
+      --secondary-light: #334155;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text: #1e293b;
+      --text-light: #64748b;
+      --accent: #f59e0b;
+      --accent-light: #fbbf24;
+      --success: #10b981;
+      --error: #ef4444;
+      --radius: 16px;
+      --radius-sm: 12px;
+      --shadow: 0 8px 24px rgba(0,0,0,0.08);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
+      --shadow-lg: 0 15px 40px rgba(0,0,0,0.12);
+      --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      --gradient: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
       --max-mobile: 430px;
       --max-tablet: 900px;
       --max-desktop: 1400px;
+      --header-height: 70px;
     }
+    
     [data-theme='dark'] {
-      --primary: #43aaff;
-      --secondary: #e9ecef;
-      --bg: #161b2a;
-      --accent: #ffd700;
-      --white: #222938;
-      --gradient: linear-gradient(120deg, #263860 60%, #1a2236 100%);
-      --shadow: 0 8px 44px rgba(0, 0, 0, 0.38);
+      --primary: #3b82f6;
+      --primary-light: #60a5fa;
+      --secondary: #e2e8f0;
+      --secondary-light: #cbd5e1;
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f1f5f9;
+      --text-light: #94a3b8;
+      --accent: #fbbf24;
+      --accent-light: #fcd34d;
+      --gradient: linear-gradient(135deg, #1e40af 0%, #2563eb 100%);
+      --shadow: 0 8px 24px rgba(0,0,0,0.25);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.3);
+      --shadow-lg: 0 15px 40px rgba(0,0,0,0.3);
     }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
     html, body {
       min-height: 100vh;
       background: var(--bg);
-      color: var(--secondary);
-      font-family: 'Montserrat', sans-serif;
-      font-size: 17px;
-      transition: background var(--transition), color var(--transition);
+      color: var(--text);
+      font-family: 'Poppins', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      transition: var(--transition);
     }
+    
     body {
-      margin: 0;
-      padding: 0;
       display: flex;
       flex-direction: column;
       min-height: 100vh;
+      padding: 0;
+      margin: 0;
     }
+    
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      line-height: 1.2;
+      color: var(--secondary);
+    }
+    
+    [data-theme='dark'] h1, 
+    [data-theme='dark'] h2, 
+    [data-theme='dark'] h3, 
+    [data-theme='dark'] h4, 
+    [data-theme='dark'] h5, 
+    [data-theme='dark'] h6 {
+      color: var(--secondary);
+    }
+    
     .demo-bar {
       width: 100%;
       display: flex;
       align-items: center;
-      gap: 0.9rem;
-      padding: 0.7rem 1.2rem 0.7rem 1.2rem;
-      background: var(--white);
-      box-shadow: var(--shadow);
+      gap: 1rem;
+      padding: 0.8rem 1.5rem;
+      background: var(--card-bg);
+      box-shadow: var(--shadow-md);
       position: sticky;
       top: 0;
-      z-index: 20;
-      border-radius: 0 0 var(--radius) var(--radius);
-      transition: background var(--transition), box-shadow var(--transition);
+      z-index: 100;
+      transition: var(--transition);
       flex-wrap: wrap;
     }
-    [data-theme='dark'] .demo-bar {
-      background: #181e2c;
-      color: var(--accent);
-    }
+    
     .bar-btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 0.45rem;
-      font-size: 1.13rem;
-      font-weight: 700;
-      padding: 0.6rem 1.1rem;
-      background: var(--white);
+      gap: 0.5rem;
+      font-size: 1rem;
+      font-weight: 600;
+      padding: 0.65rem 1.2rem;
+      background: var(--card-bg);
       color: var(--primary);
-      border-radius: var(--radius);
-      box-shadow: 0 2px 11px rgba(0,0,0,0.09);
-      border: 2px solid transparent;
+      border-radius: var(--radius-sm);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      border: 2px solid rgba(0,0,0,0.05);
       text-decoration: none;
-      transition: background .17s, color .17s, border-color .17s, transform 0.13s;
+      transition: var(--transition);
       cursor: pointer;
+      outline: none;
     }
-    .bar-btn i, .bar-btn .material-icons { font-size: 1.2em;}
+    
+    .bar-btn i, .bar-btn .material-icons { 
+      font-size: 1.2em;
+    }
+    
     .bar-btn:hover, .bar-btn.active {
       background: var(--primary);
       color: #fff;
-      border-color: var(--accent);
-      transform: scale(1.055);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(37, 99, 235, 0.3);
       text-decoration: none;
     }
+    
     .bar-btn.device {
-      background: var(--white);
-      padding: .55rem;
-      width: 40px; height: 40px;
+      background: var(--card-bg);
+      padding: 0.5rem;
+      width: 40px; 
+      height: 40px;
       border-radius: 50%;
-      font-size: 1.20rem;
-      min-width: 40px; min-height: 40px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-      border: 2px solid transparent;
+      font-size: 1.2rem;
+      min-width: 40px; 
+      min-height: 40px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      border: 2px solid rgba(0,0,0,0.05);
       color: var(--primary);
     }
+    
     .bar-btn.device.active {
       background: var(--primary);
       color: #fff;
-      border-color: var(--accent);
-      box-shadow: 0 4px 12px var(--primary, #0099ff, 0.10);
-      transform: scale(1.10);
+      box-shadow: 0 6px 15px rgba(37, 99, 235, 0.3);
+      transform: translateY(-2px);
     }
+    
     .bar-btn.mode {
-      background: var(--white);
+      background: var(--card-bg);
       border-radius: 50%;
-      width: 44px;height: 44px;
-      font-size: 1.18rem;
-      min-width: 44px; min-height: 44px;
+      width: 44px;
+      height: 44px;
+      font-size: 1.2rem;
+      min-width: 44px; 
+      min-height: 44px;
       color: var(--primary);
-      border: none;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.10);
+      border: 2px solid rgba(0,0,0,0.05);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
     }
-    .bar-btn.mode:active {
-      background: var(--accent);
-      color: var(--secondary);
-      transform: scale(0.93);
+    
+    .bar-btn.mode:hover {
+      background: var(--primary);
+      color: #fff;
+      transform: translateY(-2px);
     }
-    [data-theme='dark'] .bar-btn, [data-theme='dark'] .bar-btn.mode, [data-theme='dark'] .bar-btn.device {
-      background: #232e4a;
-      color: var(--accent);
-      border: none;
+    
+    [data-theme='dark'] .bar-btn, 
+    [data-theme='dark'] .bar-btn.mode, 
+    [data-theme='dark'] .bar-btn.device {
+      background: var(--card-bg);
+      color: var(--primary);
+      border: 2px solid rgba(255,255,255,0.05);
     }
-    [data-theme='dark'] .bar-btn:hover, [data-theme='dark'] .bar-btn.active, [data-theme='dark'] .bar-btn.device.active {
-      background: var(--accent);
-      color: #232e4a;
-      border-color: var(--primary);
+    
+    [data-theme='dark'] .bar-btn:hover, 
+    [data-theme='dark'] .bar-btn.active, 
+    [data-theme='dark'] .bar-btn.device.active {
+      background: var(--primary);
+      color: #fff;
     }
+    
     .travel-app-wrap {
       flex: 1;
       width: 100%;
+      max-width: var(--max-desktop);
       margin: 0 auto;
       display: flex;
       flex-direction: column;
       align-items: stretch;
-      padding: 1rem 2vw 2rem 2vw;
+      padding: 1.5rem 2vw;
       box-sizing: border-box;
-      transition: max-width 0.3s cubic-bezier(.4,0,.2,1);
-      max-width: var(--max-desktop);
+      transition: max-width 0.3s ease;
     }
+    
     .travel-app-wrap.device-mobile {
       max-width: var(--max-mobile);
-      box-shadow: 0 1px 24px rgba(0,0,0,0.13);
-      border-radius: 18px;
+      box-shadow: var(--shadow);
+      border-radius: 24px;
+      margin: 1rem auto;
+      min-height: 90vh;
     }
+    
     .travel-app-wrap.device-tablet {
       max-width: var(--max-tablet);
-      box-shadow: 0 1px 26px rgba(0,0,0,0.13);
-      border-radius: 18px;
+      box-shadow: var(--shadow);
+      border-radius: 24px;
+      margin: 1rem auto;
+      min-height: 90vh;
     }
+    
     .travel-app-wrap.device-desktop {
       max-width: var(--max-desktop);
-      box-shadow: 0 1px 26px rgba(0,0,0,0.10);
-      border-radius: 18px;
+      box-shadow: var(--shadow);
+      border-radius: 24px;
+      margin: 1rem auto;
+      min-height: 90vh;
     }
+    
     @media (max-width: 1400px) {
-      .travel-app-wrap { max-width: 100vw; border-radius: 0;}
+      .travel-app-wrap:not(.device-mobile):not(.device-tablet):not(.device-desktop) { 
+        max-width: 100%; 
+        border-radius: 0;
+      }
     }
-    @media (max-width: 950px) {
-      .travel-app-wrap,
-      .travel-app-wrap.device-tablet,
-      .travel-app-wrap.device-desktop,
-      .travel-app-wrap.device-mobile { max-width: 100vw !important; border-radius: 0;}
-    }
-    @media (max-width: 480px) {
-      .travel-app-wrap,
-      .travel-app-wrap.device-mobile { max-width: 100vw !important; border-radius: 0;}
-    }
-
-    /* HERO - 100% RESPONSIVE */
+    
+    /* HERO SECTION */
     .hero {
       background: var(--gradient);
       color: #fff;
       border-radius: var(--radius);
       box-shadow: var(--shadow);
-      margin-bottom: 2.1rem;
+      margin-bottom: 2.5rem;
       width: 100%;
       text-align: center;
-      font-weight: 800;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      /* Responsive padding */
-      padding: 2.2rem 1.2rem 1.7rem 1.2rem;
+      padding: 3rem 1.5rem;
       box-sizing: border-box;
+      position: relative;
+      overflow: hidden;
     }
+    
+    .hero::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+      opacity: 0.3;
+    }
+    
     .hero-title {
-      font-size: clamp(1.3rem, 5vw, 2.4rem);
+      font-size: clamp(1.8rem, 5vw, 2.8rem);
       font-weight: 800;
-      margin-bottom: 1.1rem;
-      line-height: 1.15;
-      letter-spacing: .02em;
-      word-break: break-word;
-      max-width: 700px;
+      margin-bottom: 1rem;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      max-width: 800px;
+      position: relative;
+      z-index: 2;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
+    
     .hero-desc {
-      font-size: clamp(1rem, 3.2vw, 1.22rem);
-      font-weight: 500;
+      font-size: clamp(1.1rem, 3.2vw, 1.3rem);
+      font-weight: 400;
       margin: 0 auto;
-      opacity: 0.97;
-      color: var(--text-dark);
-      text-shadow: 0 2px 10px rgba(0,0,0,0.06);
       max-width: 700px;
-      line-height: 1.45;
-      padding-top: .3rem;
+      line-height: 1.6;
+      padding-top: 0.5rem;
+      position: relative;
+      z-index: 2;
+      opacity: 0.95;
     }
-    @media (max-width: 720px) {
+    
+    @media (max-width: 768px) {
       .hero {
-        padding: 1.2rem 0.7rem 1.1rem 0.7rem;
+        padding: 2rem 1rem;
       }
-      .hero-title { font-size: clamp(1.1rem, 6vw, 1.37rem); }
-      .hero-desc { font-size: clamp(0.98rem, 3.7vw, 1.09rem); }
+      .hero-title { font-size: clamp(1.5rem, 6vw, 2rem); }
+      .hero-desc { font-size: clamp(1rem, 3.7vw, 1.15rem); }
     }
-    @media (max-width: 420px) {
-      .hero { padding: 0.7rem 0.2rem 0.7rem 0.2rem; }
-      .hero-title { font-size: 1rem; }
-      .hero-desc { font-size: .95rem; }
-    }
-    /* The rest of the app (same as before) */
+    
+    /* MAIN CONTENT */
     .main-app-content {
       width: 100%;
       display: flex;
@@ -235,317 +310,594 @@
       flex-wrap: wrap;
       transition: gap 0.2s;
     }
+    
+    @media (max-width: 1100px) {
+      .main-app-content {
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+    }
+    
+    /* SIDEBAR */
     .sidebar {
-      background: var(--white);
-      border-radius: calc(var(--radius) * 0.65);
-      box-shadow: 0 2px 12px rgba(0,0,0,0.09);
-      padding: 1rem 1rem;
-      min-width: 180px;
-      max-width: 210px;
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-md);
+      padding: 1.5rem;
+      min-width: 240px;
+      max-width: 260px;
       display: flex;
       flex-direction: column;
-      gap: 1rem;
-      margin-bottom: 1.1rem;
+      gap: 1.5rem;
       flex-shrink: 0;
-      transition: background var(--transition);
+      transition: var(--transition);
     }
-    .sidebar-title { font-size: 1.04rem; font-weight: 800; color: var(--primary);}
+    
+    @media (max-width: 1100px) {
+      .sidebar {
+        max-width: 100%;
+        width: 100%;
+      }
+    }
+    
+    .sidebar-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
     .search-bar {
       display: flex;
       align-items: center;
-      background: var(--input-bg);
-      border-radius: var(--radius);
-      border: 1.5px solid var(--input-border);
-      padding: 0.3rem 0.7rem;
-      gap: 0.5rem;
+      background: var(--bg);
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(0,0,0,0.08);
+      padding: 0.5rem 1rem;
+      gap: 0.75rem;
       margin-bottom: 0.5rem;
+      transition: var(--transition);
     }
+    
+    [data-theme='dark'] .search-bar {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    
+    .search-bar:focus-within {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+    }
+    
     .search-bar input {
       border: none;
       outline: none;
       background: transparent;
-      font-size: 1.03rem;
+      font-size: 1rem;
       width: 100%;
-      color: var(--text-light);
+      color: var(--text);
       font-family: inherit;
-      padding: .24rem 0;
+      padding: 0.25rem 0;
     }
-    .filter-group { display: flex; flex-direction: column; gap: 0.66rem;}
-    .filter-label { font-size: .96rem; color: var(--primary); font-weight: 700;}
-    .filter-select {
-      border-radius: var(--radius);
-      border: 1.2px solid var(--input-border);
-      padding: 0.27rem 0.5rem;
-      font-size: .98rem;
-      background: var(--input-bg);
+    
+    .search-bar input::placeholder {
       color: var(--text-light);
+    }
+    
+    .filter-group { 
+      display: flex; 
+      flex-direction: column; 
+      gap: 0.75rem;
+    }
+    
+    .filter-label { 
+      font-size: 0.95rem; 
+      color: var(--text); 
+      font-weight: 600;
+    }
+    
+    .filter-select {
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(0,0,0,0.08);
+      padding: 0.65rem 1rem;
+      font-size: 1rem;
+      background: var(--bg);
+      color: var(--text);
       font-family: inherit;
       outline: none;
+      transition: var(--transition);
+      cursor: pointer;
     }
+    
+    [data-theme='dark'] .filter-select {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    
+    .filter-select:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+    }
+    
+    /* DESTINATIONS */
     .destinations {
       flex: 1;
       width: 100%;
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1.1rem;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
       align-items: stretch;
     }
+    
+    @media (max-width: 600px) {
+      .destinations {
+        grid-template-columns: 1fr;
+      }
+    }
+    
     .destination-card {
-      background: var(--white);
+      background: var(--card-bg);
       border-radius: var(--radius);
-      box-shadow: 0 2px 12px rgba(0,0,0,0.10);
+      box-shadow: var(--shadow-md);
       overflow: hidden;
       display: flex;
       flex-direction: column;
-      transition: box-shadow .13s, transform .13s;
+      transition: var(--transition);
       cursor: pointer;
       position: relative;
-      border: 2px solid transparent;
+      border: 1px solid rgba(0,0,0,0.05);
       outline: none;
       min-width: 0;
     }
-    .destination-card:hover, .destination-card:focus-within {
-      box-shadow: 0 12px 32px rgba(0,0,0,0.18);
-      border-color: var(--primary);
-      transform: scale(1.022);
-      z-index: 1;
+    
+    [data-theme='dark'] .destination-card {
+      border: 1px solid rgba(255,255,255,0.05);
     }
+    
+    .destination-card:hover, .destination-card:focus-within {
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-5px);
+    }
+    
     .destination-card img {
       width: 100%;
-      height: 145px;
+      height: 180px;
       object-fit: cover;
-      filter: brightness(99%);
-      transition: filter .12s;
+      transition: transform 0.3s ease;
     }
+    
+    .destination-card:hover img {
+      transform: scale(1.05);
+    }
+    
+    .destination-badge {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: var(--accent);
+      color: #1e293b;
+      font-weight: 600;
+      font-size: 0.8rem;
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      z-index: 2;
+    }
+    
     .destination-info {
-      padding: 1.07rem 1rem 0.92rem 1rem;
+      padding: 1.5rem;
       flex: 1;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       background: transparent;
     }
-    .destination-title { font-size: 1.09rem; font-weight: 900; margin-bottom: 0.39rem; color: var(--primary);}
-    .destination-desc { font-size: .97rem; opacity: 0.95; margin-bottom: 0.5rem; color: var(--secondary);}
+    
+    .destination-title { 
+      font-size: 1.25rem; 
+      font-weight: 700; 
+      margin-bottom: 0.5rem; 
+      color: var(--text);
+    }
+    
+    .destination-desc { 
+      font-size: 0.95rem; 
+      margin-bottom: 1rem; 
+      color: var(--text-light);
+      line-height: 1.6;
+    }
+    
     .destination-rating {
-      display: flex; align-items: center; gap: 0.28rem;
-      font-size: 1rem; color: #f59e42; font-weight: 700;
+      display: flex; 
+      align-items: center; 
+      gap: 0.4rem;
+      font-size: 1rem; 
+      color: var(--accent); 
+      font-weight: 600;
+      margin-bottom: 1rem;
     }
+    
     .destination-actions {
-      display: flex; gap: 0.78rem; margin-top: 0.65rem;
+      display: flex; 
+      gap: 0.75rem;
+      margin-top: 0.5rem;
     }
+    
     .action-btn {
       background: var(--primary);
       color: #fff;
       border: none;
       border-radius: 50%;
-      width: 32px;height: 32px;font-size: 1rem;
-      display: flex;align-items: center;justify-content: center;
-      transition: background .13s, transform .11s;
+      width: 36px;
+      height: 36px;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
       cursor: pointer;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     }
+    
     .action-btn:hover, .action-btn:focus {
       background: var(--accent);
-      color: var(--primary);
-      transform: scale(1.11);
+      color: #1e293b;
+      transform: scale(1.1);
     }
+    
+    /* CTA SECTION */
     .cta {
-      margin: 2.2rem auto 1.2rem auto;
+      margin: 3rem auto 1.5rem auto;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 0.68rem;
+      gap: 0.75rem;
       width: 100%;
-      max-width: 520px;
+      max-width: 600px;
+      text-align: center;
     }
+    
     .cta-btn {
       background: var(--primary);
       color: #fff;
       border: none;
       border-radius: var(--radius);
-      font-size: 1.14rem;
-      font-weight: 900;
-      padding: 1.01rem 2.1rem;
+      font-size: 1.1rem;
+      font-weight: 600;
+      padding: 1rem 2.5rem;
       box-shadow: var(--shadow);
       cursor: pointer;
-      transition: background .15s, transform 0.13s;
+      transition: var(--transition);
       outline: none;
       display: flex;
       align-items: center;
-      gap: 0.59rem;
-      letter-spacing: .04em;
+      gap: 0.75rem;
     }
-    .cta-btn:hover, .cta-btn:focus { background: #0077cc; transform: scale(1.04);}
-    .cta-note { font-size: .94rem; color: #64748b; opacity: 0.92; font-weight: 500; text-align: center;}
+    
+    .cta-btn:hover, .cta-btn:focus { 
+      background: var(--primary-light); 
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(37, 99, 235, 0.3);
+    }
+    
+    .cta-note { 
+      font-size: 0.95rem; 
+      color: var(--text-light); 
+      font-weight: 400; 
+      max-width: 500px;
+    }
+    
+    /* CONTACT SECTION */
     .contact-section {
       width: 100%;
-      max-width: 520px;
-      margin: 3.2rem auto 1.2rem auto;
-      padding: 2rem 1.1rem 1.1rem 1.1rem;
-      background: var(--white);
+      max-width: 600px;
+      margin: 3rem auto 1.5rem auto;
+      padding: 2.5rem;
+      background: var(--card-bg);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
       display: flex;
       flex-direction: column;
-      gap: 1.1rem;
+      gap: 1.5rem;
       align-items: center;
-      transition: background .16s, box-shadow .16s;
+      transition: var(--transition);
     }
-    .contact-title { font-size: 1.26rem; color: var(--primary); font-weight: 800; margin-bottom: 0.28rem; letter-spacing: .5px; display: flex; align-items: center; gap: 0.4rem;}
-    .contact-form { width: 100%; display: flex; flex-direction: column; gap: 1.1rem;}
-    .form-group { display: flex; flex-direction: column; gap: 0.22rem; width: 100%;}
-    .form-group label { font-size: .96rem; font-weight: 700; color: var(--primary);}
-    .form-group input, .form-group textarea {
-      font-family: inherit; padding: 0.72rem 0.98rem; border-radius: var(--radius);
-      border: 1.5px solid var(--input-border); background: var(--input-bg); color: var(--secondary);
-      font-size: .99rem; transition: border-color .12s, background .11s, color .11s; outline: none; resize: none; font-weight: 500;
-    }
-    .form-group input:focus, .form-group textarea:focus { border-color: var(--primary); background: #e6f5ff; color: var(--primary);}
-    .contact-submit {
-      background: var(--primary); color: #fff; border: none; border-radius: var(--radius);
-      font-size: 1rem; font-weight: 800; padding: 0.78rem 1.8rem;
-      box-shadow: var(--shadow); cursor: pointer;
-      transition: background .12s, transform 0.12s; outline: none;
-      display: flex; align-items: center; gap: 0.4rem; align-self: flex-end; letter-spacing: .03em;
-    }
-    .contact-submit:hover, .contact-submit:focus { background: var(--accent); color: var(--secondary); transform: scale(1.04);}
-    .contact-success { color: #2ecc71; margin-top: 0.6rem; font-weight: 700; font-size: .99rem; display: flex; align-items: center; gap: .3rem;}
-    /* RESPONSIVE */
-    @media (max-width: 1200px) {
-      .travel-app-wrap, .travel-app-wrap.device-tablet, .travel-app-wrap.device-desktop, .travel-app-wrap.device-mobile { max-width: 100vw !important; border-radius: 0;}
-      .main-app-content { flex-direction: column; gap: 1.1rem;}
-      .sidebar { margin-right: 0; max-width: 100%;}
-      .hero-title { font-size: 1.5rem;}
-      .destinations { grid-template-columns: 1fr 1fr;}
-    }
-    @media (max-width: 900px) {
-      .main-app-content { flex-direction: column; gap: 1rem;}
-      .sidebar { min-width: unset; max-width: 100%; align-items: stretch;}
-      .hero { font-size: 1.1rem;}
-      .destinations { grid-template-columns: 1fr;}
-      .contact-section { padding: 1rem 0.4rem;}
-      .cta { margin: 1.2rem auto 1rem auto;}
-      .cta-btn { font-size: .93rem; padding: 0.7rem 1.1rem;}
-    }
+    
     @media (max-width: 600px) {
-      .demo-bar { gap: 0.15rem; padding: 0.20rem 0.06rem 0.20rem 0.06rem; flex-wrap: wrap;}
-      .bar-btn { font-size: .89rem; padding: 0.12rem 0.3rem;}
-      .bar-btn.device, .bar-btn.mode { width: 26px; height: 26px; min-width: 26px; min-height: 26px; font-size: .82rem;}
-      .main-app-content { gap: 0.3rem;}
-      .sidebar, .contact-section { font-size: .85rem;}
-      .sidebar, .contact-section, .hero { padding: 0.3rem;}
-      .destination-card img { height: 80px;}
-      .travel-app-wrap { padding: 0.1rem 0.5vw;}
+      .contact-section {
+        padding: 1.5rem;
+      }
     }
-    /* Dark mode contrast and accessibility */
-    [data-theme='dark'] body, [data-theme='dark'] .hero, [data-theme='dark'] .cta-note, [data-theme='dark'] .contact-section, [data-theme='dark'] .form-group label, [data-theme='dark'] .destination-desc { color: #fff !important; }
-    [data-theme='dark'] .destination-title { color: var(--accent);}
-    [data-theme='dark'] .sidebar { background: #232e4a;}
-    [data-theme='dark'] .destinations { color: #fff;}
-    [data-theme='dark'] .destination-card { background: #181e2c;}
-    [data-theme='dark'] .destination-card:hover, [data-theme='dark'] .destination-card:focus-within { border-color: var(--accent);}
-    [data-theme='dark'] .contact-section { background: #181e2c;}
-    [data-theme='dark'] .cta-btn { background: var(--accent); color: #222c3d;}
-    [data-theme='dark'] .cta-btn:hover, [data-theme='dark'] .cta-btn:focus { background: var(--primary); color: #fff;}
-    [data-theme='dark'] .contact-submit { background: var(--accent); color: #232e4a;}
-    [data-theme='dark'] .contact-submit:hover, [data-theme='dark'] .contact-submit:focus { background: var(--primary); color: #fff;}
+    
+    .contact-title { 
+      font-size: 1.5rem; 
+      color: var(--primary); 
+      font-weight: 700; 
+      margin-bottom: 0.5rem; 
+      display: flex; 
+      align-items: center; 
+      gap: 0.75rem;
+    }
+    
+    .contact-form { 
+      width: 100%; 
+      display: flex; 
+      flex-direction: column; 
+      gap: 1.5rem;
+    }
+    
+    .form-group { 
+      display: flex; 
+      flex-direction: column; 
+      gap: 0.5rem; 
+      width: 100%;
+    }
+    
+    .form-group label { 
+      font-size: 0.95rem; 
+      font-weight: 600; 
+      color: var(--text);
+    }
+    
+    .form-group input, 
+    .form-group textarea {
+      font-family: inherit; 
+      padding: 0.85rem 1.25rem; 
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(0,0,0,0.08);
+      background: var(--bg);
+      color: var(--text);
+      font-size: 1rem; 
+      transition: var(--transition); 
+      outline: none; 
+      resize: none; 
+      font-weight: 400;
+    }
+    
+    [data-theme='dark'] .form-group input,
+    [data-theme='dark'] .form-group textarea {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    
+    .form-group input:focus, 
+    .form-group textarea:focus { 
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+    }
+    
+    .contact-submit {
+      background: var(--primary); 
+      color: #fff; 
+      border: none; 
+      border-radius: var(--radius);
+      font-size: 1rem; 
+      font-weight: 600; 
+      padding: 0.9rem 2rem;
+      box-shadow: var(--shadow); 
+      cursor: pointer;
+      transition: var(--transition); 
+      outline: none;
+      display: flex; 
+      align-items: center; 
+      gap: 0.5rem;
+      align-self: flex-start;
+    }
+    
+    .contact-submit:hover, 
+    .contact-submit:focus { 
+      background: var(--primary-light); 
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(37, 99, 235, 0.3);
+    }
+    
+    .contact-success { 
+      color: var(--success); 
+      margin-top: 0.5rem; 
+      font-weight: 600; 
+      font-size: 1rem; 
+      display: flex; 
+      align-items: center; 
+      gap: 0.5rem;
+      transition: var(--transition);
+    }
+    
+    /* RESPONSIVE ADJUSTMENTS */
+    @media (max-width: 900px) {
+      .travel-app-wrap {
+        padding: 1rem;
+      }
+      
+      .hero {
+        margin-bottom: 1.5rem;
+      }
+      
+      .sidebar {
+        padding: 1.25rem;
+      }
+      
+      .contact-section {
+        margin: 2rem auto;
+        padding: 1.75rem;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .demo-bar {
+        padding: 0.75rem 1rem;
+        gap: 0.5rem;
+        justify-content: center;
+      }
+      
+      .bar-btn {
+        padding: 0.5rem 0.8rem;
+        font-size: 0.9rem;
+      }
+      
+      .bar-btn.device, .bar-btn.mode {
+        width: 36px;
+        height: 36px;
+        min-width: 36px;
+        min-height: 36px;
+      }
+      
+      .travel-app-wrap {
+        padding: 1rem 0.75rem;
+      }
+      
+      .hero {
+        padding: 1.5rem 1rem;
+      }
+      
+      .destination-card img {
+        height: 150px;
+      }
+    }
+    
+    /* ANIMATIONS */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .fade-in {
+      animation: fadeIn 0.6s ease forwards;
+    }
+    
+    .card-animate {
+      animation: fadeIn 0.4s ease forwards;
+      animation-delay: calc(var(--i) * 0.1s);
+      opacity: 0;
+    }
   </style>
 </head>
 <body>
   <nav class="demo-bar">
-    <a href="../index.html" class="bar-btn" title="Back to Portfolio"><i class="fas fa-arrow-left"></i></a>
-    <a href="https://github.com/jersonen/projects-code/blob/main/ecommerce-platform-demo.html" class="bar-btn" target="_blank" rel="noopener noreferrer" title="View Project Code"><i class="fab fa-github"></i></a>
+    <a href="../index.html" class="bar-btn" title="Back to Portfolio"><i class="fas fa-arrow-left"></i> Portfolio</a>
+    <a href="" class="bar-btn" target="_blank" rel="noopener noreferrer" title="View Project Code"><i class="fab fa-github"></i> Code</a>
     <button class="bar-btn device active" id="btn-mobile" aria-label="Mobile view"><span class="material-icons">smartphone</span></button>
     <button class="bar-btn device" id="btn-tablet" aria-label="Tablet view"><span class="material-icons">tablet_mac</span></button>
     <button class="bar-btn device" id="btn-desktop" aria-label="Desktop view"><span class="material-icons">desktop_windows</span></button>
     <button class="bar-btn mode" id="mode-toggle-btn" aria-label="Toggle dark/light mode"><span class="material-icons" id="mode-icon">dark_mode</span></button>
   </nav>
+  
   <div class="travel-app-wrap device-mobile" id="travel-app-wrap">
     <section class="hero fade-in">
       <div class="hero-title">
         TravelX &mdash; Explore Unique Travel Experiences
       </div>
       <div class="hero-desc">
-        Discover the world's best destinations, curated by travelers for travelers.<br>
-        Use the search, filter, wishlist, booking & dark mode. Switch device view to see the responsive design!
+        Discover the world's best destinations, curated by travelers for travelers. Use the search, filter, wishlist, and dark mode features to personalize your experience.
       </div>
     </section>
+    
     <section class="main-app-content">
       <aside class="sidebar" id="sidebar">
-        <div class="sidebar-title">Plan Your Trip</div>
+        <div class="sidebar-title">
+          <span class="material-icons">travel_explore</span>
+          Plan Your Trip
+        </div>
         <div class="search-bar">
-          <span class="material-icons" style="opacity:.72;">search</span>
+          <span class="material-icons">search</span>
           <input id="searchInput" type="text" placeholder="Search destinations..." autocomplete="off">
         </div>
         <div class="filter-group">
-          <label class="filter-label" for="region-filter">Region</label>
+          <label class="filter-label" for="region-filter">
+            <span class="material-icons" style="font-size:1.1rem;">public</span>
+            Region
+          </label>
           <select id="region-filter" class="filter-select">
-            <option value="">All</option>
+            <option value="">All Regions</option>
             <option value="Europe">Europe</option>
             <option value="Asia">Asia</option>
             <option value="South America">South America</option>
+            <option value="North America">North America</option>
+            <option value="Africa">Africa</option>
           </select>
         </div>
         <div class="filter-group">
-          <label class="filter-label" for="type-filter">Type</label>
+          <label class="filter-label" for="type-filter">
+            <span class="material-icons" style="font-size:1.1rem;">category</span>
+            Experience Type
+          </label>
           <select id="type-filter" class="filter-select">
-            <option value="">All</option>
-            <option value="Nature">Nature</option>
-            <option value="Cultural">Cultural</option>
-            <option value="Adventure">Adventure</option>
+            <option value="">All Types</option>
+            <option value="Nature">Nature & Outdoors</option>
+            <option value="Cultural">Cultural & Historical</option>
+            <option value="Adventure">Adventure Sports</option>
+            <option value="Beach">Beach & Relaxation</option>
+            <option value="Food">Food & Culinary</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label class="filter-label" for="price-filter">
+            <span class="material-icons" style="font-size:1.1rem;">attach_money</span>
+            Price Range
+          </label>
+          <select id="price-filter" class="filter-select">
+            <option value="">Any Price</option>
+            <option value="low">Budget Friendly</option>
+            <option value="medium">Mid Range</option>
+            <option value="high">Luxury</option>
           </select>
         </div>
       </aside>
+      
       <div class="destinations" id="destinations"></div>
     </section>
+    
     <section class="cta">
       <button class="cta-btn" id="cta-btn">
-        <span class="material-icons">flight</span>
+        <span class="material-icons">flight_takeoff</span>
         Start Your Journey
       </button>
-      <span class="cta-note">Try switching device, dark mode, search and wishlist features!</span>
+      <span class="cta-note">Switch device views to see the responsive design. Try dark mode, search and wishlist features!</span>
     </section>
+    
     <section class="contact-section fade-in" id="contact">
       <div class="contact-title">
-        <span class="material-icons">mail</span>
-        Contact Us
+        <span class="material-icons">mail_outline</span>
+        Contact Our Travel Experts
       </div>
       <form class="contact-form" id="contact-form" autocomplete="off">
         <div class="form-group">
-          <label for="contact-name">Name</label>
-          <input id="contact-name" name="name" type="text" required placeholder="Your name">
+          <label for="contact-name">Your Name</label>
+          <input id="contact-name" name="name" type="text" required placeholder="Enter your name">
         </div>
         <div class="form-group">
-          <label for="contact-email">Email</label>
+          <label for="contact-email">Email Address</label>
           <input id="contact-email" name="email" type="email" required placeholder="you@email.com">
         </div>
         <div class="form-group">
-          <label for="contact-message">Message</label>
-          <textarea id="contact-message" name="message" required rows="3" placeholder="How can we help you?"></textarea>
+          <label for="contact-message">Your Message</label>
+          <textarea id="contact-message" name="message" required rows="4" placeholder="Tell us about your dream vacation..."></textarea>
         </div>
         <button type="submit" class="contact-submit">
           <span class="material-icons">send</span>
-          Send
+          Send Message
         </button>
         <div class="contact-success" id="contact-success" style="display:none;">
-          <span class="material-icons" style="color:#2ecc71;">check_circle</span>
+          <span class="material-icons">check_circle</span>
           Thank you! We'll get back to you soon.
         </div>
       </form>
     </section>
   </div>
+  
   <script type="module">
     // Device switcher
     const btnMobile = document.getElementById('btn-mobile');
     const btnTablet = document.getElementById('btn-tablet');
     const btnDesktop = document.getElementById('btn-desktop');
     const wrap = document.getElementById('travel-app-wrap');
+    
     function setDevice(device) {
       wrap.classList.remove('device-mobile', 'device-tablet', 'device-desktop');
       btnMobile.classList.remove('active');
       btnTablet.classList.remove('active');
       btnDesktop.classList.remove('active');
+      
       if (device === 'mobile') {
         wrap.classList.add('device-mobile');
         btnMobile.classList.add('active');
@@ -557,88 +909,136 @@
         btnDesktop.classList.add('active');
       }
     }
+    
     btnMobile.onclick = () => setDevice('mobile');
     btnTablet.onclick = () => setDevice('tablet');
     btnDesktop.onclick = () => setDevice('desktop');
+    
     // Init on load
     setDevice('mobile');
-
+    
     // Destinations data
     const places = [
       {
         region: "Europe",
         type: "Nature",
-        img: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80",
-        title: "Norway Fjords",
-        desc: "Experience breathtaking fjords and the northern lights.",
+        img: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80",
+        title: "Norwegian Fjords",
+        desc: "Experience breathtaking fjords and the northern lights in this once-in-a-lifetime adventure.",
         rating: 4.9,
         wish: false,
+        price: "high"
       },
       {
         region: "Asia",
         type: "Cultural",
-        img: "https://images.unsplash.com/photo-1465156799763-2c087c332922?auto=format&fit=crop&w=400&q=80",
+        img: "https://images.unsplash.com/photo-1465156799763-2c087c332922?auto=format&fit=crop&w=800&q=80",
         title: "Kyoto Temples",
-        desc: "Walk through centuries of history and cherry blossoms in Japan.",
+        desc: "Walk through centuries of history and cherry blossoms in Japan's cultural heart.",
         rating: 4.8,
         wish: false,
+        price: "medium"
       },
       {
         region: "Europe",
-        type: "Nature",
-        img: "https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=400&q=80",
+        type: "Beach",
+        img: "https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=800&q=80",
         title: "Santorini Views",
-        desc: "Marvel at the whitewashed houses and blue domes over the Aegean.",
+        desc: "Marvel at the whitewashed houses and blue domes over the Aegean Sea.",
         rating: 4.7,
         wish: false,
+        price: "high"
       },
       {
         region: "South America",
         type: "Adventure",
-        img: "https://images.unsplash.com/photo-1454023492550-5696f8ff10e1?auto=format&fit=crop&w=400&q=80",
-        title: "Patagonia Adventure",
-        desc: "Trek through wild landscapes and glacier-filled valleys.",
+        img: "https://images.unsplash.com/photo-1454023492550-5696f8ff10e1?auto=format&fit=crop&w=800&q=80",
+        title: "Patagonia Trek",
+        desc: "Trek through wild landscapes and glacier-filled valleys on this epic adventure.",
         rating: 4.9,
         wish: false,
+        price: "medium"
       },
       {
         region: "Asia",
-        type: "Nature",
-        img: "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=400&q=80",
+        type: "Beach",
+        img: "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=800&q=80",
         title: "Bali Beaches",
-        desc: "Relax on stunning beaches and explore volcanic landscapes.",
+        desc: "Relax on stunning beaches and explore volcanic landscapes in tropical paradise.",
         rating: 4.8,
         wish: false,
+        price: "medium"
       },
       {
         region: "Europe",
         type: "Cultural",
-        img: "https://images.unsplash.com/photo-1528909514045-2fa4ac7a08ba?auto=format&fit=crop&w=400&q=80",
+        img: "https://images.unsplash.com/photo-1528909514045-2fa4ac7a08ba?auto=format&fit=crop&w=800&q=80",
         title: "Paris Landmarks",
-        desc: "Admire the Eiffel Tower and enjoy exquisite French cuisine.",
+        desc: "Admire the Eiffel Tower and enjoy exquisite French cuisine in the city of lights.",
         rating: 4.7,
         wish: false,
+        price: "high"
+      },
+      {
+        region: "North America",
+        type: "Nature",
+        img: "https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=800&q=80",
+        title: "Yosemite National Park",
+        desc: "Explore majestic waterfalls, giant sequoias, and breathtaking vistas.",
+        rating: 4.9,
+        wish: false,
+        price: "low"
+      },
+      {
+        region: "Africa",
+        type: "Adventure",
+        img: "https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&w=800&q=80",
+        title: "Safari Adventure",
+        desc: "Witness the great migration and experience wildlife like never before.",
+        rating: 4.8,
+        wish: false,
+        price: "high"
       }
     ];
+    
     const destinationsDiv = document.getElementById('destinations');
+    
     function renderDestinations(list) {
       destinationsDiv.innerHTML = '';
+      
       if (!list.length) {
-        destinationsDiv.innerHTML = `<div style="grid-column:1/-1;text-align:center;opacity:.8;padding:1.7rem 0;color:var(--primary);font-weight:700;">No destinations found.</div>`;
+        destinationsDiv.innerHTML = `
+          <div style="grid-column:1/-1; text-align:center; padding:3rem 0; color:var(--text-light);">
+            <span class="material-icons" style="font-size:3rem; margin-bottom:1rem; opacity:0.7;">travel_explore</span>
+            <h3 style="font-weight:600; margin-bottom:0.5rem;">No destinations found</h3>
+            <p>Try adjusting your search or filters</p>
+          </div>`;
         return;
       }
+      
       list.forEach((p, idx) => {
         const card = document.createElement('div');
-        card.className = 'destination-card';
+        card.className = 'destination-card card-animate';
+        card.style.setProperty('--i', idx);
         card.tabIndex = 0;
+        
+        const badgeText = p.price === 'high' ? 'Luxury' : 
+                         p.price === 'medium' ? 'Premium' : 'Budget';
+        
         card.innerHTML = `
-          <img src="${p.img}" alt="${p.title}">
+          <div style="position:relative; overflow:hidden;">
+            <img src="${p.img}" alt="${p.title}" loading="lazy">
+            <div class="destination-badge">${badgeText}</div>
+          </div>
           <div class="destination-info">
             <div>
               <div class="destination-title">${p.title}</div>
               <div class="destination-desc">${p.desc}</div>
               <div class="destination-rating">
-                <span class="material-icons" style="font-size:1.13rem;">star</span> ${p.rating}
+                <span class="material-icons">star</span>
+                <span>${p.rating}</span>
+                <span style="color:var(--text-light); margin:0 8px;">•</span>
+                <span>${p.region}</span>
               </div>
             </div>
             <div class="destination-actions">
@@ -646,111 +1046,181 @@
                 <i class="fa${p.wish ? 's' : 'r'} fa-heart"></i>
               </button>
               <button class="action-btn book-btn" title="Book this destination" data-idx="${idx}">
-                <i class="fas fa-plane-departure"></i>
+                <i class="fas fa-shopping-cart"></i>
               </button>
               <button class="action-btn info-btn" title="More info" data-idx="${idx}">
-                <i class="fas fa-info-circle"></i>
+                <i class="fas fa-info"></i>
               </button>
             </div>
           </div>`;
+        
         destinationsDiv.appendChild(card);
       });
+      
+      // Add event listeners
       destinationsDiv.querySelectorAll('.wish-btn').forEach(btn => {
         btn.addEventListener('click', e => {
+          e.stopPropagation();
           const idx = +btn.getAttribute('data-idx');
           places[idx].wish = !places[idx].wish;
           renderDestinations(getFilteredPlaces());
         });
       });
+      
       destinationsDiv.querySelectorAll('.book-btn').forEach(btn => {
         btn.addEventListener('click', e => {
+          e.stopPropagation();
           const idx = +btn.getAttribute('data-idx');
-          alert(`Booking requested for ${places[idx].title}! (demo only, not implemented)`);
+          alert(`Booking requested for ${places[idx].title}! (This is a demo feature)`);
         });
       });
+      
       destinationsDiv.querySelectorAll('.info-btn').forEach(btn => {
         btn.addEventListener('click', e => {
+          e.stopPropagation();
           const idx = +btn.getAttribute('data-idx');
-          alert(`Info about ${places[idx].title}:\n\n${places[idx].desc}\n\nRating: ${places[idx].rating}`);
+          alert(`Info about ${places[idx].title}:\n\n${places[idx].desc}\n\nRegion: ${places[idx].region}\nType: ${places[idx].type}\nRating: ${places[idx].rating}`);
+        });
+      });
+      
+      destinationsDiv.querySelectorAll('.destination-card').forEach(card => {
+        card.addEventListener('click', (e) => {
+          if (!e.target.closest('.action-btn')) {
+            const idx = card.querySelector('.wish-btn').getAttribute('data-idx');
+            alert(`Showing details for ${places[idx].title}`);
+          }
         });
       });
     }
+    
     // Search/filter
     const searchInput = document.getElementById('searchInput');
     const regionFilter = document.getElementById('region-filter');
     const typeFilter = document.getElementById('type-filter');
+    const priceFilter = document.getElementById('price-filter');
+    
     function getFilteredPlaces() {
       const search = searchInput ? searchInput.value.trim().toLowerCase() : '';
       const region = regionFilter ? regionFilter.value : '';
       const type = typeFilter ? typeFilter.value : '';
-      return places.filter(p =>
-        (!search || (p.title + p.desc).toLowerCase().includes(search)) &&
-        (!region || p.region === region) &&
-        (!type || p.type === type)
-      );
+      const price = priceFilter ? priceFilter.value : '';
+      
+      return places.filter(p => {
+        const matchesSearch = !search || 
+          p.title.toLowerCase().includes(search) || 
+          p.desc.toLowerCase().includes(search) || 
+          p.region.toLowerCase().includes(search);
+          
+        const matchesRegion = !region || p.region === region;
+        const matchesType = !type || p.type === type;
+        const matchesPrice = !price || p.price === price;
+        
+        return matchesSearch && matchesRegion && matchesType && matchesPrice;
+      });
     }
+    
     function updateDestinations() {
       renderDestinations(getFilteredPlaces());
     }
+    
     if (searchInput) searchInput.addEventListener('input', updateDestinations);
     if (regionFilter) regionFilter.addEventListener('change', updateDestinations);
     if (typeFilter) typeFilter.addEventListener('change', updateDestinations);
+    if (priceFilter) priceFilter.addEventListener('change', updateDestinations);
+    
+    // Initial render
     renderDestinations(places);
-
+    
     // CTA Animation
     const ctaBtn = document.getElementById('cta-btn');
     ctaBtn.addEventListener('click', () => {
+      const originalHTML = ctaBtn.innerHTML;
       ctaBtn.innerHTML = '<span class="material-icons">autorenew</span> Loading...';
+      ctaBtn.disabled = true;
+      
       setTimeout(() => {
         ctaBtn.innerHTML = '<span class="material-icons">check_circle</span> Journey Started!';
-        ctaBtn.style.background = 'var(--accent)';
-        ctaBtn.style.color = 'var(--secondary)';
-        setTimeout(()=>{
-          ctaBtn.innerHTML = '<span class="material-icons">flight</span> Start Your Journey';
+        ctaBtn.style.background = 'var(--success)';
+        
+        setTimeout(() => {
+          ctaBtn.innerHTML = originalHTML;
           ctaBtn.style.background = '';
-          ctaBtn.style.color = '';
-        }, 2200);
-      }, 900);
+          ctaBtn.disabled = false;
+        }, 2000);
+      }, 1000);
     });
-
+    
     // Dark/Light Mode
     const html = document.documentElement;
     const modeToggleBtn = document.getElementById('mode-toggle-btn');
     const modeIcon = document.getElementById('mode-icon');
+    
     function setTheme(theme) {
       html.setAttribute('data-theme', theme);
+      
       if (theme === 'dark') {
         modeIcon.textContent = 'light_mode';
         modeToggleBtn.setAttribute('aria-label', 'Switch to light mode');
-        window.localStorage.setItem('theme', 'dark');
+        localStorage.setItem('theme', 'dark');
       } else {
         modeIcon.textContent = 'dark_mode';
         modeToggleBtn.setAttribute('aria-label', 'Switch to dark mode');
-        window.localStorage.setItem('theme', 'light');
+        localStorage.setItem('theme', 'light');
       }
     }
+    
     (() => {
-      const saved = window.localStorage.getItem('theme');
-      if (saved) setTheme(saved);
-      else if (window.matchMedia('(prefers-color-scheme: dark)').matches) setTheme('dark');
+      const saved = localStorage.getItem('theme');
+      if (saved) {
+        setTheme(saved);
+      } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        setTheme('dark');
+      }
     })();
+    
     modeToggleBtn.onclick = () => {
       const isDark = html.getAttribute('data-theme') === 'dark';
       setTheme(isDark ? 'light' : 'dark');
     };
-
+    
     // Contact Form
     const contactForm = document.getElementById('contact-form');
     const contactSuccess = document.getElementById('contact-success');
+    
     contactForm.addEventListener('submit', function(e) {
       e.preventDefault();
+      
+      // Show success message
       contactSuccess.style.display = 'flex';
-      contactForm.querySelectorAll('input,textarea,button').forEach(el => el.disabled = true);
+      contactForm.querySelectorAll('input, textarea, button').forEach(el => el.disabled = true);
+      
+      // Reset after delay
       setTimeout(() => {
         contactSuccess.style.display = 'none';
         contactForm.reset();
-        contactForm.querySelectorAll('input,textarea,button').forEach(el => el.disabled = false);
+        contactForm.querySelectorAll('input, textarea, button').forEach(el => el.disabled = false);
       }, 3000);
+    });
+    
+    // Animation on scroll
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.1
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('fade-in');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+    
+    // Observe elements
+    document.querySelectorAll('.fade-in:not(.hero)').forEach(el => {
+      observer.observe(el);
     });
   </script>
 </body>
